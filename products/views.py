@@ -42,7 +42,6 @@ def admin_create_order(request):
     :param request:
     :return:
     """
-    print(request.data['orders'])
     if request.data['orders']:
         product_orders = pd.read_csv(request.data['orders'])
         is_data_exists = False
@@ -52,7 +51,6 @@ def admin_create_order(request):
                 product_exists = Products.objects.get(product_name=each_row[2])
             except ObjectDoesNotExist:
                 product_exists = None
-            print(product_exists)
             if product_exists:
                 product_exists.price = each_row[3]
                 product_exists.total_amount = product_exists.ordered_quantity*each_row[4]
